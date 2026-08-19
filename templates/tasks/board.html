@@ -1,0 +1,14 @@
+{% extends 'base.html' %}{% block title %}Tasks{% endblock %}
+{% block content %}
+<div class="container-xl">
+  <div class="d-flex justify-content-between mb-3 flex-wrap gap-2">
+    <h1 class="aev-h1">Kanban Board</h1>
+    <a href="{% url 'task_create' %}" class="btn btn-grad">+ New Task</a>
+  </div>
+  <div class="row g-3">
+    <div class="col-md-4"><div class="aev-kanban"><h5 class="aev-h5"><i class="bi bi-circle"></i> To Do ({{ todo|length }})</h5>{% for t in todo %}{% include 'tasks/_card.html' with t=t %}{% endfor %}</div></div>
+    <div class="col-md-4"><div class="aev-kanban"><h5 class="aev-h5"><i class="bi bi-arrow-repeat"></i> Doing ({{ doing|length }})</h5>{% for t in doing %}{% include 'tasks/_card.html' with t=t %}{% endfor %}</div></div>
+    <div class="col-md-4"><div class="aev-kanban"><h5 class="aev-h5"><i class="bi bi-check2-circle"></i> Done ({{ done|length }})</h5>{% for t in done %}{% include 'tasks/_card.html' with t=t %}{% endfor %}</div></div>
+  </div>
+</div>
+{% endblock %}

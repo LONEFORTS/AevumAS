@@ -1,0 +1,54 @@
+{% extends 'base.html' %}{% block title %}Dashboard{% endblock %}
+{% block content %}
+<div class="container-xl">
+  <div class="d-flex flex-wrap align-items-center justify-content-between mb-3">
+    <div>
+      <h1 class="aev-h1">Welcome back, {{ user.username }}</h1>
+      <p class="aev-sub">Your journey, perfectly timed. — {{ today|date:"l, d M Y" }}</p>
+    </div>
+    <div class="d-flex gap-2">
+      <a href="{% url 'note_create' %}" class="btn btn-grad"><i class="bi bi-plus-lg"></i> New Note</a>
+      <a href="{% url 'snippet_create' %}" class="btn btn-ghost"><i class="bi bi-code-slash"></i> New Snippet</a>
+    </div>
+  </div>
+  <div class="row g-3">
+    <div class="col-6 col-md-3"><div class="aev-stat"><span class="lbl">Notes</span><span class="num">{{ notes_count }}</span><i class="bi bi-journal-text"></i></div></div>
+    <div class="col-6 col-md-3"><div class="aev-stat"><span class="lbl">Snippets</span><span class="num">{{ snippets_count }}</span><i class="bi bi-code-slash"></i></div></div>
+    <div class="col-6 col-md-3"><div class="aev-stat"><span class="lbl">Tasks done</span><span class="num">{{ tasks_done }}</span><i class="bi bi-check2-square"></i></div></div>
+    <div class="col-6 col-md-3"><div class="aev-stat"><span class="lbl">Focus today</span><span class="num">{{ focus_today }}</span><i class="bi bi-stopwatch"></i></div></div>
+  </div>
+  <div class="aev-card mt-4">
+    <h5 class="aev-h5"><i class="bi bi-grid-3x3"></i> Activity heatmap (last 49 days)</h5>
+    <div class="heatmap">
+      {% for d, count in heatmap.items %}
+        <span class="cell c{{ count }}" title="{{ d }} — {{ count }}"></span>
+      {% endfor %}
+    </div>
+  </div>
+  <div class="row g-3 mt-1">
+    <div class="col-md-7">
+      <div class="aev-card">
+        <h5 class="aev-h5"><i class="bi bi-lightning"></i> Quick actions</h5>
+        <div class="d-flex flex-wrap gap-2">
+          <a class="btn btn-grad btn-sm" href="{% url 'note_create' %}">+ Note</a>
+          <a class="btn btn-ghost btn-sm" href="{% url 'snippet_create' %}">+ Snippet</a>
+          <a class="btn btn-ghost btn-sm" href="{% url 'task_create' %}">+ Task</a>
+          <a class="btn btn-ghost btn-sm" href="{% url 'event_create' %}">+ Event</a>
+          <a class="btn btn-ghost btn-sm" href="{% url 'focus_timer' %}">Focus 25</a>
+          <a class="btn btn-ghost btn-sm" href="{% url 'share_settings' %}">Profile</a>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-5">
+      <div class="aev-card">
+        <h5 class="aev-h5"><i class="bi bi-trophy"></i> Recent badges</h5>
+        {% if achievements %}<div class="d-flex flex-wrap gap-2">{% for a in achievements %}<span class="badge-chip">{{ a.icon }} {{ a.title }}</span>{% endfor %}</div>{% else %}<p class="aev-sub">Start writing, coding or focusing to earn badges.</p>{% endif %}
+      </div>
+    </div>
+  </div>
+  <div class="aev-card mt-3">
+    <h5 class="aev-h5"><i class="bi bi-calendar-event"></i> Upcoming</h5>
+    {% if upcoming_events %}<ul class="list-unstyled mb-0">{% for e in upcoming_events %}<li><i class="bi bi-dot"></i> {{ e.title }} — <small>{{ e.date|date:"d M" }}</small></li>{% endfor %}</ul>{% else %}<p class="aev-sub">No upcoming items.</p>{% endif %}
+  </div>
+</div>
+{% endblock %}

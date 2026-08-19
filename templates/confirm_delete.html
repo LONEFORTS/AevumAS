@@ -1,0 +1,13 @@
+{% extends 'base.html' %}{% block title %}Confirm delete{% endblock %}
+{% block content %}
+<div class="container-xl" style="max-width:520px;">
+  <div class="aev-card text-center">
+    <h2><i class="bi bi-exclamation-triangle"></i> Delete {{ label|lower }}?</h2>
+    <p>“{{ obj }}” will be removed permanently.</p>
+    <form method="post">{% csrf_token %}
+      <button class="btn btn-grad w-100">Yes, delete</button>
+      <a class="btn btn-ghost w-100 mt-2" href="{% url back %}">Cancel</a>
+    </form>
+  </div>
+</div>
+{% endblock %}

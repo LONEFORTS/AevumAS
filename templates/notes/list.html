@@ -1,0 +1,20 @@
+{% extends 'base.html' %}{% block title %}Notes{% endblock %}
+{% block content %}
+<div class="container-xl">
+  <div class="d-flex justify-content-between align-items-center mb-3 flex-wrap gap-2">
+    <h1 class="aev-h1">Notes</h1>
+    <a href="{% url 'note_create' %}" class="btn btn-grad"><i class="bi bi-plus-lg"></i> New Note</a>
+  </div>
+  <form method="get" class="mb-3"><input class="form-control" name="q" value="{{ q }}" placeholder="Search notes…"></form>
+  {% if notes %}<div class="row g-3">{% for n in notes %}
+    <div class="col-md-6 col-lg-4"><div class="aev-card">
+      <h5><i class="bi bi-journal-text"></i> {{ n.title }}{% if n.pinned %} <span class="badge-chip">📌</span>{% endif %}</h5>
+      <p class="aev-sub">{{ n.content|truncatechars:140 }}</p>
+      <div class="d-flex flex-wrap gap-1 mb-2">{% for t in n.tags.all %}<span class="tag">{{ t.name }}</span>{% endfor %}</div>
+      <a class="btn btn-grad btn-sm" href="{% url 'note_detail' pk=n.pk %}">Open</a>
+      <a class="btn btn-ghost btn-sm" href="{% url 'note_edit' pk=n.pk %}">Edit</a>
+      <a class="btn btn-ghost btn-sm" href="{% url 'note_delete' pk=n.pk %}">Delete</a>
+    </div></div>
+  {% endfor %}</div>{% else %}<p class="aev-sub">No notes yet — <a href="{% url 'note_create' %}">create the first one</a>.</p>{% endif %}
+</div>
+{% endblock %}

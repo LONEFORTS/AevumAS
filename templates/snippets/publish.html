@@ -1,0 +1,13 @@
+{% extends 'base.html' %}{% block title %}Publish to GitHub{% endblock %}
+{% block content %}
+<div class="container-xl" style="max-width:560px;">
+  <h1 class="aev-h1"><i class="bi bi-github"></i> Publish "{{ snippet.title }}"</h1>
+  <p class="aev-sub">This will create/update the file <code>aevum/{{ snippet.title|slugify }}.{{ snippet.language }}</code> in the repo.</p>
+  <form method="post" class="aev-card">{% csrf_token %}
+    <div class="mb-3"><label>Repo owner (your GitHub username)</label>{{ form.repo_owner }}</div>
+    <div class="mb-3"><label>Repository name</label>{{ form.repo_name }}</div>
+    <p class="aev-sub"><i class="bi bi-info-circle"></i> No GitHub token saved yet? <a href="{% url 'share_settings' %}">Add one here</a> before publishing.</p>
+    <button class="btn btn-grad w-100">Publish now</button></form>
+  <a href="{% url 'snippet_detail' pk=snippet.pk %}" class="btn btn-ghost w-100 mt-2">Cancel</a>
+</div>
+{% endblock %}

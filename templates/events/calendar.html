@@ -1,0 +1,25 @@
+{% extends 'base.html' %}{% block title %}Calendar{% endblock %}
+{% block content %}
+<div class="container-xl">
+  <div class="d-flex justify-content-between align-items-center mb-3 flex-wrap gap-2">
+    <h1 class="aev-h1"><i class="bi bi-calendar3"></i> {{ month_label }}</h1>
+    <div class="d-flex gap-2">
+      <a class="btn btn-ghost" href="?month={{ prev }}">← Prev</a>
+      <a class="btn btn-ghost" href="?month={{ next }}">Next →</a>
+      <a class="btn btn-grad" href="{% url 'event_create' %}">+ Event</a>
+    </div>
+  </div>
+  <div class="aev-cal">
+    {% for dn in 'Mon,Tue,Wed,Thu,Fri,Sat,Sun'|split:"," %}<div class="cal-head">{{ dn }}</div>{% endfor %}
+    {% for d in cells %}
+      {% if d %}
+        <div class="cal-cell"><div class="cal-day">{{ d.day }}</div>
+        {% for e in month_events|d:"" %}{% if forloop.parentloop.counter0 == forloop.counter0 %}{% endif %}{% endfor %}
+        {% for e in month_events|d %}<span class="cal-event" style="background:{{ e.color }}">{{ e.title }}</span>{% endfor %}
+        </div>
+      {% else %}<div class="cal-cell empty"></div>{% endif %}
+    {% endfor %}
+  </div>
+  <p class="aev-sub mt-3">Showing month events. Add deadlines to plan your capstone full picture.</p>
+</div>
+{% endblock %}

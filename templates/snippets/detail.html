@@ -1,0 +1,19 @@
+{% extends 'base.html' %}{% block title %}{{ snippet.title }}{% endblock %}
+{% block content %}
+<div class="container-xl">
+  <a href="{% url 'snippets_list' %}" class="btn btn-ghost btn-sm mb-3">← Back</a>
+  <div class="aev-card">
+    <div class="d-flex flex-wrap justify-content-between align-items-center">
+      <h1 class="aev-h1">{{ snippet.title }} <span class="lang-chip">{{ snippet.language }}</span></h1>
+      <div><a class="btn btn-grad" href="{% url 'snippet_publish' pk=snippet.pk %}"><i class="bi bi-github"></i> Publish to GitHub</a></div>
+    </div>
+    <p class="aev-sub">{{ snippet.description }}</p>
+    <pre class="code-full"><code>{{ snippet.code }}</code></pre>
+    <p class="aev-sub mb-1">Labels: {% for lab in snippet.labels_csv|split:"," %}{% if lab %}<span class="tag">{{ lab }}</span>{% endif %}{% endfor %}</p>
+    {% if snippet.last_pushed_to %}<p class="aev-sub">Last pushed: <a href="{{ snippet.last_pushed_to }}" target="_blank">{{ snippet.last_pushed_to }}</a></p>{% endif %}
+    <hr>
+    <a class="btn btn-ghost" href="{% url 'snippet_edit' pk=snippet.pk %}">Edit</a>
+    <a class="btn btn-ghost" href="{% url 'snippet_delete' pk=snippet.pk %}">Delete</a>
+  </div>
+</div>
+{% endblock %}

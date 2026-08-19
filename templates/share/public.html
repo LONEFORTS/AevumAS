@@ -1,0 +1,14 @@
+{% extends 'base.html' %}{% block title %}{{ owner.username }}{% endblock %}
+{% block content %}
+<div class="container-xl" style="max-width:780px;">
+{% if private %}
+  <h1 class="aev-h1">{{ owner.username }}</h1>
+  <p class="aev-sub">This profile is private.</p>
+{% else %}
+  <h1 class="aev-h1"><i class="bi bi-person-circle"></i> {{ owner.username }}</h1>
+  <p class="aev-sub">{% if profile %}{{ profile.public_bio }}{% endif %}</p>
+  {% if notes %}<h5 class="aev-h5">Notes</h5><ul>{% for n in notes %}<li><strong>{{ n.title }}</strong> — {{ n.content|truncatechars:120 }}</li>{% endfor %}</ul>{% endif %}
+  {% if snippets %}<h5 class="aev-h5">Code</h5><ul>{% for s in snippets %}<li><strong>{{ s.title }}</strong> ({{ s.language }}) — <a href="{% url 'snippet_detail' pk=s.pk %}">open</a></li>{% endfor %}</ul>{% endif %}
+{% endif %}
+</div>
+{% endblock %}

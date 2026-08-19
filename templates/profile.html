@@ -1,0 +1,18 @@
+{% extends 'base.html' %}{% block title %}Profile{% endblock %}
+{% block content %}
+<div class="container-xl" style="max-width:780px;">
+  <h1 class="aev-h1"><i class="bi bi-person"></i> {{ user.username }}</h1>
+  <div class="aev-card">
+    <p>{{ profile.bio|default:"Add a short bio in Share settings to personalize your profile." }}</p>
+    <hr>
+    <h5 class="aev-h5">Stats</h5>
+    <div class="row g-2">
+      <div class="col-6"><div class="aev-stat"><span class="lbl">Notes</span><span class="num">{{ stats.notes }}</span></div></div>
+      <div class="col-6"><div class="aev-stat"><span class="lbl">Snippets</span><span class="num">{{ stats.snippets }}</span></div></div>
+      <div class="col-6"><div class="aev-stat"><span class="lbl">Tasks</span><span class="num">{{ stats.tasks }}</span></div></div>
+      <div class="col-6"><div class="aev-stat"><span class="lbl">Focus sessions</span><span class="num">{{ stats.focus }}</span></div></div>
+    </div>
+    <a class="btn btn-grad mt-3" href="{% url 'share_settings' %}">Manage public profile</a>
+  </div>
+</div>
+{% endblock %}

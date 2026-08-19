@@ -1,0 +1,11 @@
+<div class="aev-card mb-2 task-card">
+  <div class="d-flex justify-content-between"><strong>{{ t.title }}</strong><span class="prio p-{{ t.priority }}">{{ t.priority }}</span></div>
+  {% if t.due_date %}<small class="aev-sub">Due {{ t.due_date|date:"d M" }}</small>{% endif %}
+  <div class="mt-2 d-flex gap-1 flex-wrap">
+    {% if t.status != 'todo' %}<a class="btn btn-ghost btn-sm" href="{% url 'task_move' pk=t.pk new_status='todo' %}">← Todo</a>{% endif %}
+    {% if t.status != 'doing' %}<a class="btn btn-ghost btn-sm" href="{% url 'task_move' pk=t.pk new_status='doing' %}">→ Doing</a>{% endif %}
+    {% if t.status != 'done' %}<a class="btn btn-grn btn-sm" href="{% url 'task_move' pk=t.pk new_status='done' %}">✓ Done</a>{% endif %}
+    <a class="btn btn-ghost btn-sm" href="{% url 'task_edit' pk=t.pk %}">Edit</a>
+    <a class="btn btn-ghost btn-sm" href="{% url 'task_delete' pk=t.pk %}">×</a>
+  </div>
+</div>

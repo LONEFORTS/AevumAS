@@ -1,0 +1,22 @@
+{% extends 'base.html' %}{% block title %}Welcome{% endblock %}
+{% block content %}
+<section class="aev-hero">
+  <div class="container-xl">
+    <span class="aev-pill">⏳ Aevum · flagship capstone</span>
+    <h1>One workspace for your<br><span class="grad">entire student life.</span></h1>
+    <p>Notes, code vault, Kanban tasks, calendar, focus timer, achievements, and one-tap GitHub publishing — all running from your phone.</p>
+    <div class="hero-cta">
+      <a class="btn btn-grad" href="{% url 'register' %}">Create account</a>
+      <a class="btn btn-ghost" href="{% url 'login' %}">Login</a>
+    </div>
+    <div class="hero-grid">
+      <div><i class="bi bi-journal-text"></i><h4>Smart Notes</h4><p>Markdown-grade notes with tags and file attachments.</p></div>
+      <div><i class="bi bi-code-slash"></i><h4>Code Vault</h4><p>Save snippets, syntax-highlighted, and push straight to GitHub.</p></div>
+      <div><i class="bi bi-kanban"></i><h4>Kanban Tasks</h4><p>To-do · Doing · Done, instantly drag-and-move.</p></div>
+      <div><i class="bi bi-calendar3"></i><h4>Calendar</h4><p>Visualize exams, classes, deadlines at a glance.</p></div>
+      <div><i class="bi bi-stopwatch"></i><h4>Focus Timer</h4><p>Pomodoro sessions with streaks & badges.</p></div>
+      <div><i class="bi bi-share"></i><h4>Public Profile</h4><p>Share your work with a single link.</p></div>
+    </div>
+  </div>
+</section>
+{% endblock %}

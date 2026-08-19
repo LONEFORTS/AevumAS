@@ -1,0 +1,8 @@
+{% extends 'base.html' %}{% block title %}New snippet{% endblock %}
+{% block content %}
+<div class="container-xl" style="max-width:820px;">
+  <h1 class="aev-h1">{% if mode == 'create' %}New snippet{% else %}Edit snippet{% endif %}</h1>
+  <form method="post" class="aev-card">{% csrf_token %}{{ form.as_p }}
+    <button class="btn btn-grad w-100">Save</button></form>
+</div>
+{% endblock %}

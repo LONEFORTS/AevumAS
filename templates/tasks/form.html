@@ -1,0 +1,7 @@
+{% extends 'base.html' %}{% block title %}Task{% endblock %}
+{% block content %}
+<div class="container-xl" style="max-width:560px;">
+  <h1 class="aev-h1">{% if task %}Edit task{% else %}New task{% endif %}</h1>
+  <form method="post" class="aev-card">{% csrf_token %}{{ form.as_p }}<button class="btn btn-grad w-100">Save</button></form>
+</div>
+{% endblock %}

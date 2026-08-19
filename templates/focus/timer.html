@@ -1,0 +1,15 @@
+{% extends 'base.html' %}{% block title %}Focus{% endblock %}
+{% block content %}
+<div class="container-xl" style="max-width:620px;">
+  <h1 class="aev-h1"><i class="bi bi-stopwatch"></i> Focus Timer</h1>
+  <div class="aev-card text-center">
+    <div class="focus-display" id="focusDisplay">25:00</div>
+    <form id="focusForm" method="post" action="{% url 'focus_start' %}" class="d-flex gap-2 justify-content-center mb-3">{% csrf_token %}{{ form.duration_min }}<button class="btn btn-grad">Start</button></form>
+    <div class="d-flex gap-2 justify-content-center"><button class="btn btn-ghost" id="custom25">25</button><button class="btn btn-ghost" id="custom45">45</button><button class="btn btn-ghost" id="custom60">60</button></div>
+    <p class="aev-sub mt-3">Today: {{ today_min }} minutes</p>
+    <hr>
+    <h6>Recent sessions</h6>
+    <ul class="list-unstyled">{% for s in sessions %}<li><i class="bi bi-dot"></i> {{ s.duration_min }} min — {{ s.started_at|date:"d M H:i" }}{% if s.note %} <small>{{ s.note }}</small>{% endif %}</li>{% empty %}<li class="aev-sub">No sessions yet.</li>{% endfor %}</ul>
+  </div>
+</div>
+{% endblock %}

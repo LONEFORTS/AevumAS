@@ -1,0 +1,11 @@
+{% extends 'base.html' %}{% block title %}Search{% endblock %}
+{% block content %}
+<div class="container-xl">
+  <h1 class="aev-h1"><i class="bi bi-search"></i> Search</h1>
+  <form method="get" class="mb-3"><input class="form-control" name="q" value="{{ q }}" placeholder="Search everything…" autofocus></form>
+  {% if q %}<p class="aev-sub">{{ total }} result{{ total|pluralize }}</p>{% endif %}
+  {% if notes %}<h5 class="aev-h5 mt-3">Notes</h5><ul class="list-unstyled">{% for n in notes %}<li><a href="{% url 'note_detail' pk=n.pk %}">{{ n.title }}</a> — {{ n.content|truncatechars:80 }}</li>{% endfor %}</ul>{% endif %}
+  {% if snippets %}<h5 class="aev-h5 mt-3">Snippets</h5><ul class="list-unstyled">{% for s in snippets %}<li><a href="{% url 'snippet_detail' pk=s.pk %}">{{ s.title }}</a> <span class="lang-chip">{{ s.language }}</span></li>{% endfor %}</ul>{% endif %}
+  {% if tasks %}<h5 class="aev-h5 mt-3">Tasks</h5><ul class="list-unstyled">{% for t in tasks %}<li>{{ t.title }} <small>[{{ t.status }}]</small></li>{% endfor %}</ul>{% endif %}
+</div>
+{% endblock %}

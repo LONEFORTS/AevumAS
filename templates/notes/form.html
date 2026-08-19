@@ -1,0 +1,10 @@
+{% extends 'base.html' %}{% block title %}{% if mode == 'create' %}New note{% else %}Edit note{% endif %}{% endblock %}
+{% block content %}
+<div class="container-xl" style="max-width:760px;">
+  <h1 class="aev-h1">{% if mode == 'create' %}New note{% else %}Edit note{% endif %}</h1>
+  <form method="post" enctype="multipart/form-data" class="aev-card">{% csrf_token %}{{ form.as_p }}
+    <input class="form-control mb-2" name="tag_names" placeholder="Tags (comma separated)">
+    <input class="form-control mb-3" name="files" type="file" multiple>
+    <button class="btn btn-grad w-100">Save</button></form>
+</div>
+{% endblock %}

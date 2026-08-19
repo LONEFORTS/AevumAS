@@ -1,0 +1,10 @@
+{% extends 'base.html' %}{% block title %}Achievements{% endblock %}
+{% block content %}
+<div class="container-xl">
+  <h1 class="aev-h1"><i class="bi bi-trophy"></i> Achievements</h1>
+  <div class="row g-3 mt-2">
+    {% for a in earned %}<div class="col-md-4 col-lg-3"><div class="aev-card text-center unlocked"><div class="b-icon">{{ a.icon }}</div><h5>{{ a.title }}</h5><small>Earned {{ a.earned_at|date:"d M Y" }}</small></div></div>{% endfor %}
+    {% for t,info in locked %}<div class="col-md-4 col-lg-3"><div class="aev-card text-center locked"><div class="b-icon">{{ info.2|default:'🏆' }}</div><h5>{{ info.1 }}</h5><small>Locked</small></div></div>{% endfor %}
+  </div>
+</div>
+{% endblock %}

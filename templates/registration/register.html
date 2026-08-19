@@ -1,0 +1,11 @@
+{% extends 'base.html' %}{% block title %}Register{% endblock %}
+{% block content %}
+<div class="aev-auth">
+  <h2>Create your Aevum</h2>
+  <form method="post">
+    {% csrf_token %}{{ form.as_p }}
+    <button class="btn btn-grad w-100">Create account</button>
+  </form>
+  <p>Already have one? <a href="{% url 'login' %}">Login</a></p>
+</div>
+{% endblock %}

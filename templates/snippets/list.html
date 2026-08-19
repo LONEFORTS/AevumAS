@@ -1,0 +1,24 @@
+{% extends 'base.html' %}{% block title %}Code Vault{% endblock %}
+{% block content %}
+<div class="container-xl">
+  <div class="d-flex justify-content-between flex-wrap gap-2 mb-3">
+    <h1 class="aev-h1"><i class="bi bi-code-slash"></i> Code Vault</h1>
+    <a class="btn btn-grad" href="{% url 'snippet_create' %}"><i class="bi bi-plus-lg"></i> New Snippet</a>
+  </div>
+  <form class="d-flex gap-2 mb-3" method="get">
+    <input class="form-control" name="q" value="{{ q }}" placeholder="Search snippets…">
+    <select class="form-select" name="lang"><option value="">All languages</option>{% for code,label in languages %}<option value="{{ code }}" {% if lang == code %}selected{% endif %}>{{ label }}</option>{% endfor %}</select>
+    <button class="btn btn-grad">Filter</button>
+  </form>
+  {% if snippets %}<div class="row g-3">{% for s in snippets %}
+    <div class="col-md-6"><div class="aev-card">
+      <h5>{{ s.title }} <span class="lang-chip">{{ s.language }}</span></h5>
+      <p class="aev-sub">{{ s.description|truncatechars:100 }}</p>
+      <pre class="code-peek"><code>{{ s.code|truncatechars:200 }}</code></pre>
+      <a href="{% url 'snippet_detail' pk=s.pk %}" class="btn btn-grad btn-sm">Open</a>
+      <a href="{% url 'snippet_publish' pk=s.pk %}" class="btn btn-ghost btn-sm"><i class="bi bi-github"></i> Publish</a>
+      <a href="{% url 'snippet_edit' pk=s.pk %}" class="btn btn-ghost btn-sm">Edit</a>
+    </div></div>
+  {% endfor %}</div>{% else %}<p class="aev-sub">No snippets yet — <a href="{% url 'snippet_create' %}">create one</a>.</p>{% endif %}
+</div>
+{% endblock %}

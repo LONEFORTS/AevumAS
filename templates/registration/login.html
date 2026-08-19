@@ -1,0 +1,14 @@
+{% extends 'base.html' %}{% block title %}Login{% endblock %}
+{% block content %}
+<div class="aev-auth">
+  <h2>Welcome back</h2>
+  {% if error %}<div class="aev-alert">{{ error }}</div>{% endif %}
+  <form method="post">
+    {% csrf_token %}
+    <input class="form-control" name="username" placeholder="Username" required>
+    <input class="form-control" name="password" type="password" placeholder="Password" required>
+    <button class="btn btn-grad w-100">Login</button>
+  </form>
+  <p>New here? <a href="{% url 'register' %}">Create an account</a></p>
+</div>
+{% endblock %}
